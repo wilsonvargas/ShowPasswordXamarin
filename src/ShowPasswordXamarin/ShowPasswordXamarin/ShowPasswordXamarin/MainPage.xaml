@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:triggers="clr-namespace:ShowPasswordXamarin.Triggers"
+             mc:Ignorable="d"
+             x:Class="ShowPasswordXamarin.MainPage"
+             BackgroundColor="White">
+
+    <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+        <Entry x:Name="UserEntry"  Placeholder="Usuario" HorizontalOptions="FillAndExpand"/>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            HeightRequest="45"
+            HorizontalOptions="FillAndExpand"
+            IsClippedToBounds="True">
+
+            <Entry
+                x:Name="EntryPassword"
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="Medium"
+                IsPassword="True"
+                Keyboard="Plain"
+                BackgroundColor="White"
+                Placeholder="Password"/>
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="0,0,3,0"
+                HeightRequest="27"
+                HorizontalOptions="End"
+                BackgroundColor="White"
+                IsClippedToBounds="True"
+                VerticalOptions="Center"
+                WidthRequest="35">
+                <Button x:Name="ShowPasswordButton" BackgroundColor="White">
+                    <Button.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="-4,-6,-4,-6" />
+                            <On Platform="iOS" Value="0" />
+                        </OnPlatform>
+                    </Button.Margin>
+                    <Button.Triggers>
+                        <EventTrigger Event="Clicked">
+                            <triggers:ShowPasswordTriggerAction
+                                EntryPasswordName="EntryPassword"
+                                IconImageName="ShowPasswordButtonIcon" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Image
+                    x:Name="ShowPasswordButtonIcon"
+                    HeightRequest="25"
+                    HorizontalOptions="Fill"
+                    InputTransparent="True"
+                    VerticalOptions="Fill"
+                    WidthRequest="25" >
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="FileImageSource">
+                            <On Platform="iOS">showicon.png</On>
+                            <On Platform="Android">showicon.png</On>
+                            <On Platform="UWP">Assets/showicon.png</On>
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+            </Grid>
+        </Grid>
+    </StackLayout>
+</ContentPage>
